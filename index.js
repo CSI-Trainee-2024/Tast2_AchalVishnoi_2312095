@@ -24,7 +24,8 @@ let sec=0;
 let min=0;
 let hrs=0;
 let count=0;
- function update(){
+let endTime=30;
+ function update(  ){
          sec++;
          if(sec==60){
             sec=0
@@ -43,11 +44,14 @@ let count=0;
          document.getElementById("hour").innerHTML=h;
          document.getElementById("min").innerHTML=m;
          document.getElementById("sec").innerHTML=s;
-         let percent=(count)*100/(60*2);
+         let percent=(count)*100/(endTime);
  document.getElementById("progress_bar").style.width=percent+"%";
+           if(endTime<=count)
+            clearInterval(timer);
 
- }
-  
+      }
+      let timer=setInterval(update,1000);
+      
+         
+   
 
- setInterval(update,1000);
- 

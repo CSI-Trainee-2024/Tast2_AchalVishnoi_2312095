@@ -1,4 +1,12 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
 body{
+    
     background-color: rgb(12, 59, 72);
     height: 100vh;
     display: flex;
@@ -7,7 +15,102 @@ body{
     color: azure;
     margin: 0;
     font-family: Arial, Helvetica, sans-serif;
+
 }
+.top__heading{
+      
+    width: 80vw;
+    background-color: rgb(46, 90, 101) ;
+    display: flex;
+    justify-content: space-around;
+   
+    padding: 20px;
+    border-radius: 15px;
+
+    h1{
+        color: rgb(209, 239, 244);
+        font-size: x-large;
+        margin-top: 5%;
+
+       
+    }
+    button{
+        cursor: pointer;
+        border-radius: 20px;
+        width: 180px;
+        background-color: rgb(137, 170, 172);
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        color: black;
+        font-size: large;
+        font: bold;
+        i{
+            color: #16475b;
+            
+            
+        }
+    }
+    button:hover{
+        background-color:  rgb(63, 99, 102) ;
+        color: rgb(28, 31, 32);
+        border: black,solid,2px;
+    }
+    
+
+
+}
+/*===========for responsive============*/
+@media only screen and (max-width:845px){
+  .top__heading{
+    h1{
+        font-size: large;
+       
+    }
+    button{
+        font-size: medium;
+    }
+  }
+}
+@media only screen and (max-width:750px){
+    .top__heading{
+      h1{
+          font-size: large;
+         
+      }
+      button{
+          font-size: medium;
+          width: 150px;
+      }
+    }
+  }
+  @media only screen and (max-width:630px){
+    .top__heading{
+        flex-direction: column;
+        align-items: center;
+      h1{
+          font-size: large;
+          margin-top: 0;
+          text-align: center;
+         
+      }
+      button{
+          font-size: medium;
+          width: 150px;
+      }
+    }
+  }
+
+
+
+
+
+
+
+
+
+
+/*=========================timer=========================*/
 .container{
      width: 80%;
      max-width: 600px;
@@ -15,6 +118,7 @@ body{
      background-color: rgb(46, 90, 101);
      border-radius: 10px;
      padding: 20px;
+     display: none;
 
 }
 h1{

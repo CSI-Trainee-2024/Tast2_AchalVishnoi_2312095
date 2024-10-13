@@ -163,7 +163,7 @@ body{
 
  /*===========add button=====================>*/
 
- #add ,i {
+ #add ,#add i {
     display: inline-block;
     height: 40px;
     width: 40px;
@@ -224,34 +224,25 @@ body{
 
 /*=========================timer=========================*/
 #container{
-     width: 400px;
-     max-width: 600px;
+     width: 27vw;
+     max-width: 800px;
      margin: 0 auto;
      background-color: rgb(46, 90, 101);
      border-radius: 10px;
      padding: 20px;
      margin-top: 8%;
-     display: block;
-     #add ,i {
-        display: inline-block;
-        height: 40px;
-        width: 40px;
-        
-        text-align: center;
-        line-height: 40px;
-        border-radius: 50%;
-        color: #ffffff;
-        background-color: #96c6d8;
-        transition: all 0.5s ease;
-        cursor: pointer;
-        font-size: xx-large;
-    
-     }
+     display: flex;
+     flex-direction: column;
+     justify-items: center;
+     
+     
+       
 
 
 }
 h1{
     margin-bottom: 1em;
+    text-align: center;
 }
 #countdown{
     display: flex;
@@ -260,7 +251,7 @@ h1{
 }
 #countdown div{
     text-align: center;
-       padding: 30px;
+       padding: 22px;
     background-color:rgb(111, 141, 143);
     border-radius: 6px;
     color: rgb(0, 0, 0);
@@ -276,8 +267,9 @@ h1{
    
 }
 h2{
-    font-size: 1.5em;
+    font-size: 1.3em;
     margin-bottom: 1em;
+    margin-top: 1em;
 }
 .progress_container{
     background-color: rgb(190, 199, 204);
@@ -296,7 +288,7 @@ h2{
                                    
     width: 0%;
     height: 100%;
-    transition: width 1s ease-in-out;
+    transition: width 0.5s ease-in-out;
     border-radius: 5px;
 }
 #doneBtn ,i {
@@ -315,8 +307,86 @@ h2{
 
  }
 
- /*==========================table=====================*/
+ /* to make responsive */
+
+ @media only screen and (max-width:1278px){
+    #container{
+        width: 30vw;
+        h1{
+            font-size: larger;
+        }
+        #countdown div{
+            padding: 20px;
+        }
+    }
+  }
+  @media only screen and (max-width:1055px){
+    #container{
+        width: 317px;
+        h1{
+            font-size: larger;
+        }
+        #countdown div{
+            padding: 18px;
+        }
+    }
+  }
+ @media only screen and (max-width:655px){
+    #container{
+        width: 50vw;
+    }
+  }
+  @media only screen and (max-width:619px){
+    #container{
+        width: 50vw;
+        h1{
+            font-size: larger;
+        }
+        #countdown div{
+            padding: 15px;
+        }
+    }
+  }
+  @media only screen and (max-width:556px){
+    #container{
+        width: 301px;
+        h1{
+            font-size: larger;
+        }
+        #countdown div{
+            padding: 15px;
+        }
+    }
+  }
+  @media only screen and (max-width:335px){
+    #container{
+        width: 90vw;
+        h1{
+            font-size: larger;
+        }
+        #countdown div{
+            padding: 15px;
+        }
+    }
+  }
+  /*==========================table=====================*/
  #view2{
+          i {
+        display: inline-block;
+        height: 40px;
+        width: 40px;
+        margin-top: 3%;
+        text-align: center;
+        line-height: 40px;
+        border-radius: 50%;
+        color: #ffffff;
+        background-color: #96c6d8;
+        transition: all 0.5s ease;
+        cursor: pointer;
+        font-size: xx-large;
+    
+     }
+
     display: flex;
     flex-direction: column;
     

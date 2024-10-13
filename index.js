@@ -229,12 +229,14 @@ begin__workout.addEventListener("click",()=>{
     
       <div class="progress_container">
        <div id="progress_bar">
-         
+         </div>
        </div>
-      </div>
-      <button id="doneBtn" > <i class="fa-regular fa-circle-stop" style="color: rgb(46, 90, 101);"></i> </button>
-      
-    </div>`      
+        
+    </div>
+    
+       <i id="doneBtn" class="fa-regular fa-circle-stop" style="color: rgb(46, 90, 101); "></i>
+    `
+
            
       const doneBtn=document.getElementById("doneBtn");           
     beginExercise(i);  
@@ -258,7 +260,7 @@ const beginExercise=(i)=>{
 const startClock =()=>{
 const container= document.getElementById("container");
 const h1 = container.querySelector("h1");
-h1.innerHTML= "Start EXE :"+(i+1);
+h1.innerHTML= "Start exe-"+(i+1)+":";
     
 let sec=0;
 let min=0;
@@ -287,7 +289,7 @@ function update(  ){
       let present_tim=hm+":"+mm+":"+sm;
       let percent=(k)*100/(endTime);
       document.getElementById("progress_bar").style.width=percent+"%";
-    if(endTime<=k){
+    if(endTime<k){
        clearInterval(timer);
        const totalTime = present_tim;
       timeStorage.push({
@@ -347,7 +349,7 @@ const displayResult = (count,exeArray,timeStorage)=>{
      resultHeading.innerText="Workout Completed!";
      const resultDescription =document.createElement("p");
      resultDescription.setAttribute("Id","tableDescription")
-     resultDescription.innerText="Well Done! Here Are Your Workout Stats"
+     resultDescription.innerText="Well done! Here is your performance chart"
      view2.appendChild(resultHeading);
      resultHeading.appendChild(resultDescription);
      view2.appendChild(table);

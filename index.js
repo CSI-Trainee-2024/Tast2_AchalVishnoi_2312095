@@ -79,6 +79,8 @@ const begin__workout=document.getElementById("start")
 const clockView=document.getElementById("container");
 const topH=document.getElementById("top__heading");
 const addPart=document.getElementById("addPart");
+const doneBtn=document.getElementById("doneBtn");
+
 
 const exeArray =[]
 const timeStorage=[]
@@ -96,13 +98,13 @@ add.addEventListener("click",()=>{
    let se=s.value;
    let he=h.value;
    let me=m.value;
-   let sec=se<10? "0"+se:se;
-   let hrs=he=he<10? "0"+he:he;
-   let min=me<10? "0"+me:me;
+   let sec=se<10&&se>0? "0"+se:se;
+   let hrs=he=he<10&&he>0?  "0"+he:he;
+   let min=me<10&&me>0? "0"+me:me;
 
    let time =hrs+':'+min+':'+sec;
    if(exeArray.length<7){
-   exeArray.push({exe , he,me,se});
+   exeArray.push({exe , he,me,se,time});
    console.log(exeArray);
    addToPage(exe,time);
    }
@@ -126,15 +128,17 @@ begin__workout.addEventListener("click",()=>{
        return;
    } 
    else{
-      start(exeArray);
+      startWork(exeArray.length);
    }
    
 })
 
-    function start(exeArray){
+    function startWork(count){
 
-  topH.style.display="none";
-  addPart.style.display="none";
+  //topH.style.display="none";
+  //addPart.style.display="none";
+  let i=0;
+  runExercise(i,exeArray.length);
   
     }
 
@@ -143,95 +147,125 @@ begin__workout.addEventListener("click",()=>{
 /*===================start timer=================*/
 
 
-const startWork=(count)=>{
-   let i=0;
-   runExercise(i,count)
- }
+
  const runExercise=(i,count)=>{
    if(i>=count){
-     console.log("WorkOut Done")  // Display Work Out Result here
-     displayResult(count,exeArray,timeStorage)
+     console.log("WorkOut Done");  // Display Work Out Result here
+     displayResult(count,exeArray,timeStorage);
      return;
    }
    view1.style.display = "none";
   view2.style.display ="flex";
 
- let breakTime =2
- const exeElement= document.createElement("h3");
- exeElement.innerText=`start ${exeArray[i].exe} in ${breakTime}`
- view2.innerHTML = ""; 
- view2.classList.remove("newView")
- view2.classList.add("updateView")
- view2.appendChild(exeElement)
+    
+  let breakTime =5;   
+  const container= document.getElementById("container");
+  const h1 = container.querySelector("h1");
+  h1.innerHTML= "Break";
+  
+  
+ 
+
+ 
 
  // For Giving Break After Each Exercise AND at begining
 
- let breakTimer= setInterval(()=>{
-   breakTime--
-if(breakTime== 0){
-  clearInterval(breakTimer)                 // clearing Break if Timer Reaches zeRO
-  exeElement.innerText=`START Doing ${exeArray[i].exe}`//Derefering an Object value
-  const timeElement = document.createElement("div")
-  timeElement.setAttribute("id","container")
-  const container = document.getElementById("container");
+        let breakTimer= setInterval(()=>{
+       breakTime--
+
+          if(breakTime<0){
+      clearInterval(breakTimer);       
   
-  view2.appendChild(timeElement)
-  const startTime = new Date().getTime();  //Capturing Time of Starting an Exercise
-  beginExercise();    
-  createDoneBtn(i,startTime); //Once Exercise Begins Create A button to move to next Exercise
-  return;   // Important Here otherwise Next Code Block will Execute
-}
-  exeElement.innerText = `START ${exeArray[i].exe} in ${breakTime}`
-  view2.appendChild(exeElement)
+                                   
+    beginExercise(i);  
+
+ 
+     return;
+    }
+      sm= "0"+breakTime;
+
+document.getElementById("hour").innerHTML="00";
+document.getElementById("min").innerHTML="00";
+document.getElementById("sec").innerHTML=sm;
+  
  },1000)
+
+
 }
 
 //Begin Exercise Function
-const beginExercise=()=>{
+const beginExercise=(i)=>{
 const startClock =()=>{
-  let time = 0
-  let count =document.getElementById("countDown")
-  const startTimer =()=>{
-      time++
-      let hrs = Math.floor(time/3600) 
-      let mins =Math.floor((time%3600)/60);
-      let sec = time%60
-      count.innerHTML=`${hrs}:${mins}:${sec}`
-  }
- setInterval(startTimer,1000)
+const container= document.getElementById("container");
+const h1 = container.querySelector("h1");
+h1.innerHTML= "Start EXE :"+(i+1);
+    
+let sec=0;
+let min=0;
+let hrs=0;
+let k=0;
+let endTime = exeArray[i].he*60*60+exeArray[i].me*60+exeArray[i].se;
+function update(  ){
+      sec++;
+      if(sec==60){
+         sec=0
+        min++;
+      
+      if(min==60){
+         hrs++;
+         min=0;
+      }
+     }
+     k++;
+    
+      sm=sec<10? "0"+sec:sec;
+      hm=hrs<10? "0"+hrs:hrs;
+      mm=min<10? "0"+min:min;
+      document.getElementById("hour").innerHTML=hm;
+      document.getElementById("min").innerHTML=mm;
+      document.getElementById("sec").innerHTML=sm;
+      let present_tim=hm+":"+mm+":"+sm;
+      let percent=(k)*100/(endTime);
+      document.getElementById("progress_bar").style.width=percent+"%";
+    if(endTime<=k){
+       clearInterval(timer);
+       const totalTime = present_tim;
+      timeStorage.push({
+      exercise: exeArray[i].exe,
+      timeTaken: totalTime
+       })
+        runExercise(i+1,exeArray.length);
+      
+       return;
+      }
+    doneBtn.addEventListener("click",()=>{
+     
+      clearInterval(timer);
+      const totalTime = present_tim;
+      timeStorage.push({
+        exercise: exeArray[i].exe,
+        timeTaken: totalTime
+        
+      })
+      runExercise(i + 1, exeArray.length);
+      return; //Loop Back to run next exercise
+    })
+    
+   }
+   let timer=setInterval(update,1000);
+   }
+   startClock();
 }
-startClock() //Calling to start Stop Watch
-}
-
-//Creating a Done Button
-const createDoneBtn =(i,startTime)=>{
-const doneBtn =document.createElement("button")
-doneBtn.setAttribute("id","doneBtn")
-doneBtn.innerText="Done"
-view2.appendChild(doneBtn)
-
-//Adding What Action to perform After Clicking Done button
-doneBtn.addEventListener("click",()=>{
-  //Sore timing to new array as an object inside
-  const endTime = new Date().getTime();
-  const totalTime = Math.floor((endTime-startTime)/1000)
-  timeStorage.push({
-    exercise: exeArray[i].exe,
-    timeTaken: totalTime
-  })
-  runExercise(i + 1, exeArray.length); //Loop Back to run next exercise
-})
-}
-
-//Displaying The Result by Making a Table
-const displayResult= (count,exeArray,timeStorage)=>{
+       
+       
+const displayResult = (count,exeArray,timeStorage)=>{
   view2.innerHTML=""
   const table =document.createElement("table");
   table.setAttribute("class",("wholeTable"))
   table.innerHTML=` <thead>
         <tr>
             <th>Exercise</th>
-            <th>Estimate</th>
+            <th>Planned</th>
             <th>Time Taken</th>
         </tr>
     </thead>`
@@ -245,8 +279,8 @@ const displayResult= (count,exeArray,timeStorage)=>{
       table.appendChild(newRow);
      }
      const resultHeading =document.createElement("h2");
-     resultHeading.setAttribute("Id","tableHeading")
-     resultHeading.innerText="Workout Completed!"
+     resultHeading.setAttribute("Id","tableHeading");
+     resultHeading.innerText="Workout Completed!";
      const resultDescription =document.createElement("p");
      resultDescription.setAttribute("Id","tableDescription")
      resultDescription.innerText="Well Done! Here Are Your Workout Stats"

@@ -71,7 +71,8 @@ body{
 }
 /*===========for responsive============*/
 @media only screen and (max-width:845px){
-  .top__heading{
+  #top__heading{
+    
     h1{
         font-size: large;
        
@@ -82,7 +83,7 @@ body{
   }
 }
 @media only screen and (max-width:750px){
-    .top__heading{
+    #top__heading{
       h1{
           font-size: large;
          
@@ -94,7 +95,7 @@ body{
     }
   }
   @media only screen and (max-width:630px){
-    .top__heading{
+    #top__heading{
         flex-direction: column;
         align-items: center;
       h1{
@@ -223,15 +224,29 @@ body{
 
 /*=========================timer=========================*/
 #container{
-     width: 80%;
+     width: 400px;
      max-width: 600px;
      margin: 0 auto;
      background-color: rgb(46, 90, 101);
      border-radius: 10px;
      padding: 20px;
-     margin-top: 2%;
+     margin-top: 8%;
      display: block;
-     
+     #add ,i {
+        display: inline-block;
+        height: 40px;
+        width: 40px;
+        
+        text-align: center;
+        line-height: 40px;
+        border-radius: 50%;
+        color: #ffffff;
+        background-color: #96c6d8;
+        transition: all 0.5s ease;
+        cursor: pointer;
+        font-size: xx-large;
+    
+     }
 
 
 }
@@ -241,6 +256,7 @@ h1{
 #countdown{
     display: flex;
     justify-content: space-around;
+    
 }
 #countdown div{
     text-align: center;
@@ -253,7 +269,11 @@ h1{
     flex-direction: column;
     span{
         font-size: xx-large;
+        transition: 1s,ease-in-out;
     }
+    
+    
+   
 }
 h2{
     font-size: 1.5em;
@@ -279,5 +299,56 @@ h2{
     transition: width 1s ease-in-out;
     border-radius: 5px;
 }
+#doneBtn ,i {
+    display: inline-block;
+    height: 40px;
+    width: 40px;
+    
+    text-align: center;
+    line-height: 40px;
+    border-radius: 50%;
+    color: #ffffff;
+    background-color: #96c6d8;
+    transition: all 0.5s ease;
+    cursor: pointer;
+    font-size: xx-large;
+
+ }
+
+ /*==========================table=====================*/
+ #view2{
+    display: flex;
+    flex-direction: column;
+    padding: 10% ;
+ }
+ #tableDescription{
+    font-weight: 400;
+    font-size: large;
+    margin-top: 2rem;
+    word-spacing: 0.1em;
+}
+#tableHeading{
+    font-weight: 800;
+    text-align: center;
+}
+.wholeTable,.wholeTable tr{
+    border: 2px solid black;
+}
+.wholeTable{
+    height: clamp(7rem,30vw,13rem);
+    width:70vw;
+    margin-bottom: 5em;
+}
+.wholeTable td {
+    border: 1px solid black;
+    padding: 10px; 
+    text-align: left; 
+}
+.wholeTable {
+    border-collapse: collapse; 
+}
+
+
+ 
 
 

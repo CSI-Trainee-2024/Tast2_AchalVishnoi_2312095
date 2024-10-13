@@ -113,11 +113,11 @@ body{
    
     padding: 20px;
     border-radius: 15px;
-    height: 70px;
+    
     margin-top: 4%;
     #exercise{
 
-       width: 20%;
+       width: 30%;
        background-color: #b0d5e4;
        font-size: x-large;
        height: px;
@@ -148,6 +148,7 @@ body{
 
  }
 
+
  /*===========add button=====================>*/
 
  #add ,i {
@@ -174,7 +175,19 @@ body{
      
 
 
-
+/*=======================to make responsive==========*/
+@media only screen and (max-width:493px){
+    .buttonPart{
+        flex-direction: column;
+        align-items: center;
+        align-content: space-around;
+      #exercise{
+        width: 80%;
+      }
+     
+      
+    }
+  }
 
 
 

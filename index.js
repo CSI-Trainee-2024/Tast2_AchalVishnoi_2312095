@@ -51,6 +51,9 @@ let endTime=30;
 
       }
       let timer=setInterval(update,1000);
+
+      //============display by addition===============//
+      
       
          
    

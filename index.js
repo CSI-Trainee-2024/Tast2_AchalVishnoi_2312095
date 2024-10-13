@@ -125,6 +125,7 @@ add.addEventListener("click",()=>{
 begin__workout.addEventListener("click",()=>{
    if(exeArray.length==0){
        console.log("First Add Something");
+       alert("Plz add something!!")
        return;
    } 
    else{
@@ -184,10 +185,18 @@ begin__workout.addEventListener("click",()=>{
     </div>` 
 
     
-  let breakTime =5;   
+  let breakTime ;  
   const container= document.getElementById("container");
   const h1 = container.querySelector("h1");
-  h1.innerHTML= "Break";
+  if(i==0){
+   h1.innerHTML= "starting in ";
+   breakTime=6;
+  }
+   else{
+      h1.innerHTML= "Break";
+      breakTime=21;
+   } 
+  
   
   
  
@@ -200,11 +209,7 @@ begin__workout.addEventListener("click",()=>{
        breakTime--
 
           if(breakTime<0){
-
-             
-
-
-      clearInterval(breakTimer);  
+              clearInterval(breakTimer);  
 
       /*to add stop button and progress bar*/
       view2.innerHTML=
@@ -244,7 +249,9 @@ begin__workout.addEventListener("click",()=>{
  
      return;
     }
-      sm= "0"+breakTime;
+
+
+sm = breakTime<10 ? "0"+breakTime:breakTime;
 
 document.getElementById("hour").innerHTML="00";
 document.getElementById("min").innerHTML="00";

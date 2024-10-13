@@ -79,7 +79,7 @@ const begin__workout=document.getElementById("start")
 const clockView=document.getElementById("container");
 const topH=document.getElementById("top__heading");
 const addPart=document.getElementById("addPart");
-const doneBtn=document.getElementById("doneBtn");
+
 
 
 const exeArray =[]
@@ -161,25 +161,27 @@ begin__workout.addEventListener("click",()=>{
   view2.style.alignItems="center";
   
   /* ==============to remove watch from front================*/
-  view2.innerHTML=`<div  id="container">
-              <h1>Timer</h1>
-              <div id="countdown" >
-                  <div >
-                   <span id="hour">00</span>
-                   hrs
-               </div>
-                  <div>
-                   <span id="min">00</span>
-                   mins
-               </div>
-                  <div>
-                   <span id="sec">00</span>
-                   secs
-               </div>
-               
-              </div>
-                        
-            </div>`
+  view2.innerHTML=
+      `<div  id="container">
+      <h1>Timer</h1>
+      <div id="countdown" >
+          <div >
+           <span id="hour">00</span>
+           hrs
+       </div>
+          <div>
+           <span id="min">00</span>
+           mins
+       </div>
+          <div>
+           <span id="sec">00</span>
+           secs
+       </div>
+       
+      </div>
+     
+      
+    </div>` 
 
     
   let breakTime =5;   
@@ -198,9 +200,15 @@ begin__workout.addEventListener("click",()=>{
        breakTime--
 
           if(breakTime<0){
-      clearInterval(breakTimer);       
-           
-      view2.innerHTML=`<div  id="container">
+
+             
+
+
+      clearInterval(breakTimer);  
+
+      /*to add stop button and progress bar*/
+      view2.innerHTML=
+      `<div  id="container">
       <h1>Timer</h1>
       <div id="countdown" >
           <div >
@@ -226,7 +234,9 @@ begin__workout.addEventListener("click",()=>{
       </div>
       <button id="doneBtn" > <i class="fa-regular fa-circle-stop" style="color: rgb(46, 90, 101);"></i> </button>
       
-    </div>`                        
+    </div>`      
+           
+      const doneBtn=document.getElementById("doneBtn");           
     beginExercise(i);  
 
  
@@ -288,24 +298,28 @@ function update(  ){
       
        return;
       }
-    doneBtn.addEventListener("click",()=>{
+      doneBtn.addEventListener("click",()=>{
      
-      clearInterval(timer);
-      const totalTime = present_tim;
-      timeStorage.push({
-        exercise: exeArray[i].exe,
-        timeTaken: totalTime
-        
-      })
-      runExercise(i + 1, exeArray.length);
-      return; //Loop Back to run next exercise
-    })
+         clearInterval(timer);
+         const totalTime = present_tim;
+         timeStorage.push({
+           exercise: exeArray[i].exe,
+           timeTaken: totalTime
+           
+         })
+         runExercise(i + 1, exeArray.length);
+         return; //Loop Back to run next exercise
+       })
+  
     
    }
    let timer=setInterval(update,1000);
    }
    startClock();
 }
+
+
+
        
        
 const displayResult = (count,exeArray,timeStorage)=>{
@@ -340,7 +354,7 @@ const displayResult = (count,exeArray,timeStorage)=>{
      view2.style.backgroundColor= "rgb(46, 90, 101)" ;
      view2.style.paddingLeft= "10vw"
      view2.style.paddingRight= "10vw"
-     view2.style.marginTop= "10%"
+      
 
 }
 

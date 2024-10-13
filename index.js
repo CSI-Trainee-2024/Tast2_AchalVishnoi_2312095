@@ -156,6 +156,30 @@ begin__workout.addEventListener("click",()=>{
    }
    view1.style.display = "none";
   view2.style.display ="flex";
+  view2.style.height="100vh";
+  view2.style.justifyContent="center";
+  view2.style.alignItems="center";
+  
+  /* ==============to remove watch from front================*/
+  view2.innerHTML=`<div  id="container">
+              <h1>Timer</h1>
+              <div id="countdown" >
+                  <div >
+                   <span id="hour">00</span>
+                   hrs
+               </div>
+                  <div>
+                   <span id="min">00</span>
+                   mins
+               </div>
+                  <div>
+                   <span id="sec">00</span>
+                   secs
+               </div>
+               
+              </div>
+                        
+            </div>`
 
     
   let breakTime =5;   
@@ -175,8 +199,34 @@ begin__workout.addEventListener("click",()=>{
 
           if(breakTime<0){
       clearInterval(breakTimer);       
-  
-                                   
+           
+      view2.innerHTML=`<div  id="container">
+      <h1>Timer</h1>
+      <div id="countdown" >
+          <div >
+           <span id="hour">00</span>
+           hrs
+       </div>
+          <div>
+           <span id="min">00</span>
+           mins
+       </div>
+          <div>
+           <span id="sec">00</span>
+           secs
+       </div>
+       
+      </div>
+      <h2>progress:</h2>
+    
+      <div class="progress_container">
+       <div id="progress_bar">
+         
+       </div>
+      </div>
+      <button id="doneBtn" > <i class="fa-regular fa-circle-stop" style="color: rgb(46, 90, 101);"></i> </button>
+      
+    </div>`                        
     beginExercise(i);  
 
  
@@ -287,5 +337,10 @@ const displayResult = (count,exeArray,timeStorage)=>{
      view2.appendChild(resultHeading);
      resultHeading.appendChild(resultDescription);
      view2.appendChild(table);
+     view2.style.backgroundColor= "rgb(46, 90, 101)" ;
+     view2.style.paddingLeft= "10vw"
+     view2.style.paddingRight= "10vw"
+     view2.style.marginTop= "10%"
+
 }
 

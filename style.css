@@ -319,7 +319,8 @@ h2{
  #view2{
     display: flex;
     flex-direction: column;
-    padding: 10% ;
+    
+   
  }
  #tableDescription{
     font-weight: 400;

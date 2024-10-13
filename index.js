@@ -151,7 +151,9 @@ begin__workout.addEventListener("click",()=>{
 
  const runExercise=(i,count)=>{
    if(i>=count){
-     console.log("WorkOut Done");  // Display Work Out Result here
+     console.log("WorkOut Done");
+    
+     setLocal(count,timeStorage);
      displayResult(count,exeArray,timeStorage);
      return;
    }
@@ -365,5 +367,14 @@ const displayResult = (count,exeArray,timeStorage)=>{
      view2.style.paddingRight= "10vw"
       
 
+}
+const setLocal =(count,resArr)=>{
+   let i=0;
+   while(i<count){
+      localStorage.setItem("Exercise", JSON.stringify(resArr))
+      let myData = localStorage.getItem("Exercise");
+      console.log(JSON.parse(myData));
+      i++;
+   }
 }
 

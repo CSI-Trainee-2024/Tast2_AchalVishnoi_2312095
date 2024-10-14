@@ -368,10 +368,10 @@ const displayResult = (count,exeArray,timeStorage)=>{
       
 
 }
-const setLocal =(count,resArr)=>{
+const setLocal =(count,timeStorage)=>{
    let i=0;
    while(i<count){
-      localStorage.setItem("Exercise", JSON.stringify(resArr))
+      localStorage.setItem("Exercise", JSON.stringify(timeStorage))
       let myData = localStorage.getItem("Exercise");
       console.log(JSON.parse(myData));
       i++;

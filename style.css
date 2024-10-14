@@ -49,24 +49,25 @@ body{
         cursor: pointer;
         border-radius: 20px;
         width: 180px;
-        background-color: rgb(137, 170, 172);
+        background-color:#4b849b;
         display: flex;
         justify-content: space-around;
         align-items: center;
         color: black;
-        font-size: large;
+        font-size:large;
         font: bold;
         i{
-            color: #16475b;
+            background-color: transparent;
         }
     }
     button:hover{
-        background-color:  rgb(63, 99, 102) ;
-        color: rgb(28, 31, 32);
+        
+        color: rgb(105, 138, 147);
+        background-color: #324c56;
         border: black,solid,2px;
         i{
-            color: #16475b;
-            background-color: #4c7a8a;
+            color: #324c56; 
+            background-color: transparent
         }
     }
     
@@ -183,6 +184,9 @@ body{
     font-size: xx-large;
 
  }
+ #add{
+    margin-top: 0;
+ }
 
 
 
@@ -227,6 +231,9 @@ body{
             width: 20%;
             font-size: medium;
         }
+      }
+      #add{
+        margin-top: 2%;
       }     
      
       

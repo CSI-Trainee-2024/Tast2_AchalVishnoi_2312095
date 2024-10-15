@@ -152,7 +152,7 @@ begin__workout.addEventListener("click",()=>{
 
 
  const runExercise=(i,count)=>{
-   if(i>=count){
+   if(i>count){
      console.log("WorkOut Done");
     
      setLocal(count,timeStorage);

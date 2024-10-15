@@ -19,10 +19,11 @@ function updateTimer(){
 
 }setInterval(updateTimer,1000);*/
 //===================timer===========//
-function breakTimer(){
-  
-   startTimer(20);
+function relod(){
+   window.location.reload(true);
 }
+
+
 
 
        
@@ -120,6 +121,7 @@ add.addEventListener("click",()=>{
   section1.appendChild(element);
 } 
 
+
   
 /*     start         */
 begin__workout.addEventListener("click",()=>{
@@ -214,6 +216,7 @@ begin__workout.addEventListener("click",()=>{
               clearInterval(breakTimer);  
 
       /*to add stop button and progress bar*/
+
       view2.innerHTML=
       `<div  id="container">
       <h1>Timer</h1>
@@ -243,9 +246,10 @@ begin__workout.addEventListener("click",()=>{
     
        <i id="doneBtn" class="fa-regular fa-circle-stop" style="color: rgb(46, 90, 101); "></i>
     `
-
+       
            
-      const doneBtn=document.getElementById("doneBtn");           
+      const doneBtn=document.getElementById("doneBtn");  
+            
     beginExercise(i);  
 
  
@@ -267,9 +271,10 @@ document.getElementById("sec").innerHTML=sm;
 //Begin Exercise Function
 const beginExercise=(i)=>{
 const startClock =()=>{
+   let startTime=new Date().getTime();
 const container= document.getElementById("container");
 const h1 = container.querySelector("h1");
-h1.innerHTML= "Start exe-"+(i+1)+":";
+h1.innerHTML= "Start"+exeArray[i].exe+(i+1)+":";
     
 let sec=0;
 let min=0;
@@ -295,30 +300,40 @@ function update(  ){
       document.getElementById("hour").innerHTML=hm;
       document.getElementById("min").innerHTML=mm;
       document.getElementById("sec").innerHTML=sm;
-      let present_tim=hm+":"+mm+":"+sm;
+      
       let percent=(k)*100/(endTime);
       document.getElementById("progress_bar").style.width=percent+"%";
-    if(endTime<k){
-       clearInterval(timer);
-       const totalTime = present_tim;
+    if(k>endTime){
+      
+
+      clearInterval(timer);
+      
+       
+       
       timeStorage.push({
       exercise: exeArray[i].exe,
-      timeTaken: totalTime
+      timeTaken: exeArray[i].time, 
+      
        })
         runExercise(i+1,exeArray.length);
       
        return;
       }
       doneBtn.addEventListener("click",()=>{
-     
          clearInterval(timer);
-         const totalTime = present_tim;
+         
+         
+         
+         
+         
          timeStorage.push({
            exercise: exeArray[i].exe,
-           timeTaken: totalTime
+           timeTaken: hm+":"+mm+":"+sm
            
          })
+
          runExercise(i + 1, exeArray.length);
+         
          return; //Loop Back to run next exercise
        })
   

@@ -1,4 +1,5 @@
 
+
 /*const endTime=new Date("13 oct, 21::05").getTime();
 const startDate=new Date().getTime();
 
@@ -152,7 +153,7 @@ begin__workout.addEventListener("click",()=>{
 
 
  const runExercise=(i,count)=>{
-   if(i>count){
+   if(i==count){
      console.log("WorkOut Done");
     
      setLocal(count,timeStorage);
@@ -198,7 +199,7 @@ begin__workout.addEventListener("click",()=>{
   }
    else{
       h1.innerHTML= "Break";
-      breakTime=21;
+      breakTime=6;
    } 
   
   
@@ -304,37 +305,42 @@ function update(  ){
       let percent=(k)*100/(endTime);
       document.getElementById("progress_bar").style.width=percent+"%";
     if(k>endTime){
-      
-
       clearInterval(timer);
-      
-       
-       
+    
+
       timeStorage.push({
-      exercise: exeArray[i].exe,
-      timeTaken: exeArray[i].time, 
+
+         exercise: exeArray[i].exe,
+         timeTaken: exeArray[i].time
+         
+          })
+    
       
-       })
+      
+       
+     
+       
         runExercise(i+1,exeArray.length);
       
        return;
       }
       doneBtn.addEventListener("click",()=>{
+         
+        
+         
+         
          clearInterval(timer);
-         
-         
-         
-         
          
          timeStorage.push({
            exercise: exeArray[i].exe,
            timeTaken: hm+":"+mm+":"+sm
            
          })
+        
 
          runExercise(i + 1, exeArray.length);
          
-         return; //Loop Back to run next exercise
+         return; 
        })
   
     
@@ -392,4 +398,3 @@ const setLocal =(count,timeStorage)=>{
       i++;
    }
 }
-

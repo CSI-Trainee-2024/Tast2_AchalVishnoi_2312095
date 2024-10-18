@@ -186,8 +186,9 @@ begin__workout.addEventListener("click",()=>{
        
       </div>
      
-      
-    </div>` 
+    
+      `
+       
 
     
   let breakTime ;  
@@ -218,38 +219,41 @@ begin__workout.addEventListener("click",()=>{
 
       /*to add stop button and progress bar*/
 
-      view2.innerHTML=
-      `<div  id="container">
-      <h1>Timer</h1>
-      <div id="countdown" >
-          <div >
-           <span id="hour">00</span>
-           hrs
-       </div>
-          <div>
-           <span id="min">00</span>
-           mins
-       </div>
-          <div>
-           <span id="sec">00</span>
-           secs
-       </div>
-       
-      </div>
-      <h2>progress:</h2>
-    
-      <div class="progress_container">
-       <div id="progress_bar">
-         </div>
-       </div>
-        
-    </div>
-    
-       <i id="doneBtn" class="fa-regular fa-circle-stop" style="color: rgb(46, 90, 101); "></i>
-    `
-       
+      
+      
            
-      const doneBtn=document.getElementById("doneBtn");  
+      const doneBtn=document.getElementById("doneBtn"); 
+      
+      view2.innerHTML=
+`<div  id="container">
+<h1>Timer</h1>
+<div id="countdown" >
+    <div >
+     <span id="hour">00</span>
+     hrs
+ </div>
+    <div>
+     <span id="min">00</span>
+     mins
+ </div>
+    <div>
+     <span id="sec">00</span>
+     secs
+ </div>
+ 
+</div>
+<h2>progress:</h2>
+
+<div class="progress_container">
+ <div id="progress_bar">
+   </div>
+ </div>
+  
+</div>
+
+ <i id="doneBtn" class="fa-regular fa-circle-stop" style="color: rgb(46, 90, 101); "></i>
+`
+
             
     beginExercise(i);  
 
@@ -269,10 +273,12 @@ document.getElementById("sec").innerHTML=sm;
 
 }
 
+
 //Begin Exercise Function
 const beginExercise=(i)=>{
 const startClock =()=>{
-   let startTime=new Date().getTime();
+
+   const startTime=new Date().getTime()/1000;
 const container= document.getElementById("container");
 const h1 = container.querySelector("h1");
 h1.innerHTML= "Start"+exeArray[i].exe+(i+1)+":";
@@ -295,47 +301,44 @@ function update(  ){
      }
      k++;
     
-      sm=sec<10? "0"+sec:sec;
-      hm=hrs<10? "0"+hrs:hrs;
-      mm=min<10? "0"+min:min;
-      document.getElementById("hour").innerHTML=hm;
-      document.getElementById("min").innerHTML=mm;
-      document.getElementById("sec").innerHTML=sm;
+      sse=sec<10? "0"+sec:sec;
+      hhe=hrs<10? "0"+hrs:hrs;
+      mme=min<10? "0"+min:min;
+      document.getElementById("hour").innerHTML=hhe;
+      document.getElementById("min").innerHTML=mme;
+      document.getElementById("sec").innerHTML=sse;
       
       let percent=(k)*100/(endTime);
       document.getElementById("progress_bar").style.width=percent+"%";
-    if(k>endTime){
+  
+    
+      
+      
+       
+     
+      doneBtn.addEventListener("click",()=>{
+         let endT=new Date().getTime();
+     
       clearInterval(timer);
     
 
       timeStorage.push({
 
          exercise: exeArray[i].exe,
-         timeTaken: exeArray[i].time
+         timeTaken: hhe+":"+mme+":"+sse
          
           })
-    
-      
-      
-       
-     
-       
-        runExercise(i+1,exeArray.length);
-      
-       return;
-      }
-      doneBtn.addEventListener("click",()=>{
-         
         
          
          
-         clearInterval(timer);
          
-         timeStorage.push({
+         
+        /* timeStorage.push({
            exercise: exeArray[i].exe,
            timeTaken: hm+":"+mm+":"+sm
            
-         })
+         })*/
+
         
 
          runExercise(i + 1, exeArray.length);

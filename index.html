@@ -10,74 +10,63 @@
 </head>
 
 <body>
+  <article id="view1">
+    <nav id="top__heading">
+      <div>
+        <h1>Track Your Reps & Time Efficiently</h1>
+      </div>
+      <button id="start">Start Workout<i class="fa-solid fa-arrow-right" style="color: rgba(251, 91, 11, 0.943);"></i></button>
+    </nav>
 
-     <article id="view1">
-      
-        <nav id="top__heading">
-            <div><h1>Track Your Reps & Time Efficiently</h1></div>
-            <button id="start">Start Workout<i class="fa-solid fa-arrow-right" style="color: rgba(251, 91, 11, 0.943);"></i></button>
-        </nav>
+    <nav id="addPart">
+      <div class="buttonPart">
+        <input type="text" placeholder="Exercise x Reps" id="exercise" required />
 
-        <nav id="addPart">
-            <div class="buttonPart">
-              <input
-                type="text"
-                placeholder="Exercise x Reps"
-                id="exercise"
-                required
-              />
-              <div class="timeIn">
-                <input
-                type="number"
-                id="h"
-                placeholder="hrs"
-                max="12" 
-                min="0"
-                maxlength="2"
-               
-                
-                required
-              />:
-              <input
-                type="number"
-                
-                placeholder="min"
-                id="m"
-                max="60" 
-                min="0"
-                maxlength="2"
-                required
-              />:
-              <input
-                type="number"
-               
-                placeholder="sec"
-                id="s"
-                max="60" 
-                min="0"
-                maxlength="2"
-               
-                required
-              />
-              </div>
-              <button id="add"> <i class="fa-solid fa-circle-plus " style="color:  rgb(46, 90, 101);"></i> </button>
-             
-            </div>
-            <section id="display"></section>
-          </nav>
+        <div class="timeIn">
+          <input
+            type="number"
+            id="h"
+            placeholder="hrs"
+            max="12"
+            min="0"
+            oninput="validateInput(this, 12)"
+            required
+          /> :
+          <input
+            type="number"
+            id="m"
+            placeholder="min"
+            max="60"
+            min="0"
+            oninput="validateInput(this, 60)"
+            required
+          /> :
+          <input
+            type="number"
+            id="s"
+            placeholder="sec"
+            max="60"
+            min="0"
+            oninput="validateInput(this, 60)"
+            required
+          />
+        </div>
+        <button id="add"><i class="fa-solid fa-circle-plus" style="color: rgb(46, 90, 101);"></i></button>
+      </div>
+      <section id="display"></section>
+    </nav>
+  </article>
 
-        </article>
+  <article id="view2" class="newView"></article>
 
-
-
-          <article id="view2" class="newView">
-           
-            
-   
-     </article>
-
-
-    
+  <script>
+    function validateInput(input, max) {
+      if (input.value < 0) input.value = 0; // Prevent negative numbers
+      if (input.value > max) input.value = max; // Limit max value based on input type
+      if (input.value.length > 2) input.value = input.value.slice(0, 2); // Restrict to 2 digits
+    }
+  </script>
 </body>
+
 <script src="index.js"></script>
 </html>

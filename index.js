@@ -20,9 +20,6 @@ function updateTimer(){
 
 }setInterval(updateTimer,1000);*/
 //===================timer===========//
-function relod(){
-   window.location.reload(true);
-}
 
 
 
@@ -63,6 +60,39 @@ function update(  ){
       let timer =setInterval(update,1000);
 
    }
+
+
+
+   const saveWorkoutState = (state) => {
+      localStorage.setItem("workoutState", JSON.stringify(state));
+  };
+  
+  // Load workout state from localStorage
+  const loadWorkoutState = () => {
+      const state = localStorage.getItem("workoutState");
+      return state ? JSON.parse(state) : null;
+  };
+  
+  // Initialize the workout state
+  let workoutState = loadWorkoutState() || { phase: "addExercise", exercises: [], currentExerciseIndex: 0 };
+  
+  // Function to update and save the state
+  const updateState = (newState) => {
+      workoutState = { ...workoutState, ...newState };
+      saveWorkoutState(workoutState);
+  };
+  
+  // Reload handler to reset state
+  window.addEventListener("load", () => {
+      // Load previous state if exists
+      if (workoutState.phase === "startWorkout") {
+          startWorkout(workoutState.currentExerciseIndex); // Resume workout
+      } else if (workoutState.phase === "breakTime") {
+          startBreak();
+      } else if (workoutState.phase === "addExercise") {
+          displayAddExerciseScreen();
+      }
+  });
    
 
       //============display by addition===============//
@@ -103,9 +133,9 @@ input__exercise.addEventListener("keydown", (event) => {
       let se=s.value;
       let he=h.value;
       let me=m.value;
-      let sec=se<10&&se>0? "0"+se:se;
-      let hrs=he=he<10&&he>0?  "0"+he:he;
-      let min=me<10&&me>0? "0"+me:me;
+      let sec=se<10&&se>=0? "0"+se:se;
+      let hrs=he=he<10&&he>=0?  "0"+he:he;
+      let min=me<10&&me>=0? "0"+me:me;
    
       let time =hrs+':'+min+':'+sec;
       if(exeArray.length<7){
@@ -140,9 +170,9 @@ add.addEventListener("click",()=>{
    let se=s.value;
    let he=h.value;
    let me=m.value;
-   let sec=se<10&&se>0? "0"+se:se;
-   let hrs=he=he<10&&he>0?  "0"+he:he;
-   let min=me<10&&me>0? "0"+me:me;
+   let sec=se<10&&se>=0? "0"+se:se;
+   let hrs=he=he<10&&he>=0?  "0"+he:he;
+   let min=me<10&&me>=0? "0"+me:me;
 
    let time =hrs+':'+min+':'+sec;
    if(exeArray.length<7){
@@ -173,6 +203,8 @@ begin__workout.addEventListener("click",()=>{
        return;
    } 
    else{
+
+      updateState({ phase: "startWorkout", exercises: exeArray, currentExerciseIndex: 0 });
       startWork(exeArray.length);
    }
    
@@ -362,6 +394,8 @@ const beginExercise = (i) => {
                timeTaken: hhe + ":" + mme + ":" + sse
             });
 
+          updateState({ currentExerciseIndex: i + 1, phase: "breakTime" });
+
             // Move to the next exercise
             runExercise(i + 1, exeArray.length);
          };
@@ -409,6 +443,9 @@ const displayResult = (count, exeArray, timeStorage) => {
    view2.style.backgroundColor = "rgb(46, 90, 101)";
    view2.style.paddingLeft = "10vw";
    view2.style.paddingRight = "10vw";
+
+
+   localStorage.removeItem("workoutState"); 
 };
 const setLocal =(count,timeStorage)=>{
    let i=0;
@@ -419,3 +456,5 @@ const setLocal =(count,timeStorage)=>{
       i++;
    }
 }
+
+

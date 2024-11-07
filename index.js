@@ -89,6 +89,46 @@ const timeStorage=[]
 // Adding Exercise
 
 
+
+
+input__exercise.addEventListener("keydown", (event) => {
+   if (event.key === "Enter") {
+      if(input__exercise.value==""||h.value>2||m.value>60||s.value>60
+         ||h.value<0||m.value<0||s.value<0){
+         alert("invalid input!!");
+       }
+      else{
+      let exe = input__exercise.value;
+   
+      let se=s.value;
+      let he=h.value;
+      let me=m.value;
+      let sec=se<10&&se>0? "0"+se:se;
+      let hrs=he=he<10&&he>0?  "0"+he:he;
+      let min=me<10&&me>0? "0"+me:me;
+   
+      let time =hrs+':'+min+':'+sec;
+      if(exeArray.length<7){
+      exeArray.push({exe , he,me,se,time});
+      console.log(exeArray);
+      addToPage(exe,time);
+      }
+      else
+      {
+         alert("can't add more exercise!!");
+      }
+      }
+    }
+   
+   }
+)
+   
+   
+   
+   
+     
+
+
 add.addEventListener("click",()=>{
    if(input__exercise.value==""||h.value>2||m.value>60||s.value>60
       ||h.value<0||m.value<0||s.value<0){
@@ -121,6 +161,7 @@ add.addEventListener("click",()=>{
   element.innerHTML= `<h4>${exe}</h4> <h5>${time}</h5>`
   section1.appendChild(element);
 } 
+
 
 
   

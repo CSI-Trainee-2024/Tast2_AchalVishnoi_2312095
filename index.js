@@ -83,16 +83,7 @@ function update(  ){
   };
   
   // Reload handler to reset state
-  window.addEventListener("load", () => {
-      // Load previous state if exists
-      if (workoutState.phase === "startWorkout") {
-          startWorkout(workoutState.currentExerciseIndex); // Resume workout
-      } else if (workoutState.phase === "breakTime") {
-          startBreak();
-      } else if (workoutState.phase === "addExercise") {
-          displayAddExerciseScreen();
-      }
-  });
+  
    
 
       //============display by addition===============//
@@ -123,8 +114,7 @@ const timeStorage=[]
 
 input__exercise.addEventListener("keydown", (event) => {
    if (event.key === "Enter") {
-      if(input__exercise.value==""||h.value>2||m.value>60||s.value>60
-         ||h.value<0||m.value<0||s.value<0){
+      if(input__exercise.value==""){
          alert("invalid input!!");
        }
       else{
@@ -160,8 +150,7 @@ input__exercise.addEventListener("keydown", (event) => {
 
 
 add.addEventListener("click",()=>{
-   if(input__exercise.value==""||h.value>2||m.value>60||s.value>60
-      ||h.value<0||m.value<0||s.value<0){
+   if(input__exercise.value==""){
       alert("invalid input!!");
     }
    else{
@@ -357,7 +346,14 @@ const beginExercise = (i) => {
 
       let sec = 0, min = 0, hrs = 0;
       let k = 0;
-      let endTime = exeArray[i].he * 60 * 60 + exeArray[i].me * 60 + exeArray[i].se;
+
+      
+      
+    //  let endTime = (exeArray[i].he * 60 * 60)+ (exeArray[i].me * 60 ) + (exeArray[i].se);
+
+    let endTime = (parseInt(exeArray[i].he) * 60 * 60) + (parseInt(exeArray[i].me) * 60) + parseInt(exeArray[i].se);
+
+    
 
       // This function updates the timer display for the current exercise
       function update() {
@@ -371,6 +367,11 @@ const beginExercise = (i) => {
             }
          }
          k++;
+
+         console.log(endTime);
+         console.log(k);
+         
+         
 
          // Display the current time
          const sse = sec < 10 ? "0" + sec : sec;

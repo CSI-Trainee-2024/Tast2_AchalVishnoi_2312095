@@ -275,123 +275,100 @@ document.getElementById("sec").innerHTML=sm;
 
 
 //Begin Exercise Function
-const beginExercise=(i)=>{
-const startClock =()=>{
+const beginExercise = (i) => {
+   const startClock = () => {
+      const startTime = new Date().getTime() / 1000;
+      const container = document.getElementById("container");
+      const h1 = container.querySelector("h1");
+      h1.innerHTML = "Start " + exeArray[i].exe + " (" + (i + 1) + "):";
 
-   const startTime=new Date().getTime()/1000;
-const container= document.getElementById("container");
-const h1 = container.querySelector("h1");
-h1.innerHTML= "Start"+exeArray[i].exe+(i+1)+":";
-    
-let sec=0;
-let min=0;
-let hrs=0;
-let k=0;
-let endTime = exeArray[i].he*60*60+exeArray[i].me*60+exeArray[i].se;
-function update(  ){
-      sec++;
-      if(sec==60){
-         sec=0
-        min++;
-      
-      if(min==60){
-         hrs++;
-         min=0;
+      let sec = 0, min = 0, hrs = 0;
+      let k = 0;
+      let endTime = exeArray[i].he * 60 * 60 + exeArray[i].me * 60 + exeArray[i].se;
+
+      // This function updates the timer display for the current exercise
+      function update() {
+         sec++;
+         if (sec == 60) {
+            sec = 0;
+            min++;
+            if (min == 60) {
+               hrs++;
+               min = 0;
+            }
+         }
+         k++;
+
+         // Display the current time
+         const sse = sec < 10 ? "0" + sec : sec;
+         const hhe = hrs < 10 ? "0" + hrs : hrs;
+         const mme = min < 10 ? "0" + min : min;
+         document.getElementById("hour").innerHTML = hhe;
+         document.getElementById("min").innerHTML = mme;
+         document.getElementById("sec").innerHTML = sse;
+
+         // Update progress bar
+         const percent = (k * 100) / endTime;
+         document.getElementById("progress_bar").style.width = percent + "%";
+
+         // Add event listener to "done" button to store time and move to the next exercise
+         document.getElementById("doneBtn").onclick = () => {
+            clearInterval(timer); // Stop the timer
+
+            // Push the time taken for this exercise to timeStorage
+            timeStorage.push({
+               exercise: exeArray[i].exe,
+               timeTaken: hhe + ":" + mme + ":" + sse
+            });
+
+            // Move to the next exercise
+            runExercise(i + 1, exeArray.length);
+         };
       }
-     }
-     k++;
-    
-      sse=sec<10? "0"+sec:sec;
-      hhe=hrs<10? "0"+hrs:hrs;
-      mme=min<10? "0"+min:min;
-      document.getElementById("hour").innerHTML=hhe;
-      document.getElementById("min").innerHTML=mme;
-      document.getElementById("sec").innerHTML=sse;
-      
-      let percent=(k)*100/(endTime);
-      document.getElementById("progress_bar").style.width=percent+"%";
-  
-    
-      
-      
-       
-     
-      doneBtn.addEventListener("click",()=>{
-         let endT=new Date().getTime();
-     
-      clearInterval(timer);
-    
 
-      timeStorage.push({
+      const timer = setInterval(update, 1000); // Start the interval timer for the exercise
+   };
+   startClock(); // Start the exercise timer
+};
 
-         exercise: exeArray[i].exe,
-         timeTaken: hhe+":"+mme+":"+sse
-         
-          })
-        
-         
-         
-         
-         
-        /* timeStorage.push({
-           exercise: exeArray[i].exe,
-           timeTaken: hm+":"+mm+":"+sm
-           
-         })*/
-
-        
-
-         runExercise(i + 1, exeArray.length);
-         
-         return; 
-       })
-  
-    
-   }
-   let timer=setInterval(update,1000);
-   }
-   startClock();
-}
-
-
-
-       
-       
-const displayResult = (count,exeArray,timeStorage)=>{
-  view2.innerHTML=""
-  const table =document.createElement("table");
-  table.setAttribute("class",("wholeTable"))
-  table.innerHTML=` <thead>
-        <tr>
+// Adjust displayResult to show the correct final results
+const displayResult = (count, exeArray, timeStorage) => {
+   view2.innerHTML = "";
+   const table = document.createElement("table");
+   table.setAttribute("class", "wholeTable");
+   table.innerHTML = `
+      <thead>
+         <tr>
             <th>Exercise</th>
             <th>Planned</th>
             <th>Time Taken</th>
-        </tr>
-    </thead>`
-    
-     for( let a=0;a<count;a++){
-      let newRow =document.createElement("tr")
-      newRow.innerHTML=`<td>${exeArray[a].exe}</td>
-                        <td>${exeArray[a].time}</td>
-                        <td>${timeStorage[a].timeTaken}</td>
-                       `
-      table.appendChild(newRow);
-     }
-     const resultHeading =document.createElement("h2");
-     resultHeading.setAttribute("Id","tableHeading");
-     resultHeading.innerText="Workout Completed!";
-     const resultDescription =document.createElement("p");
-     resultDescription.setAttribute("Id","tableDescription")
-     resultDescription.innerText="Well done! Here is your performance chart"
-     view2.appendChild(resultHeading);
-     resultHeading.appendChild(resultDescription);
-     view2.appendChild(table);
-     view2.style.backgroundColor= "rgb(46, 90, 101)" ;
-     view2.style.paddingLeft= "10vw"
-     view2.style.paddingRight= "10vw"
-      
+         </tr>
+      </thead>`;
 
-}
+   // Populate the table with planned and actual times
+   for (let a = 0; a < count; a++) {
+      let newRow = document.createElement("tr");
+      newRow.innerHTML = `
+         <td>${exeArray[a].exe}</td>
+         <td>${exeArray[a].time}</td>
+         <td>${timeStorage[a] ? timeStorage[a].timeTaken : "N/A"}</td>`;
+      table.appendChild(newRow);
+   }
+
+   const resultHeading = document.createElement("h2");
+   resultHeading.setAttribute("Id", "tableHeading");
+   resultHeading.innerText = "Workout Completed!";
+   const resultDescription = document.createElement("p");
+   resultDescription.setAttribute("Id", "tableDescription");
+   resultDescription.innerText = "Well done! Here is your performance chart";
+
+   view2.appendChild(resultHeading);
+   resultHeading.appendChild(resultDescription);
+   view2.appendChild(table);
+   view2.style.backgroundColor = "rgb(46, 90, 101)";
+   view2.style.paddingLeft = "10vw";
+   view2.style.paddingRight = "10vw";
+};
 const setLocal =(count,timeStorage)=>{
    let i=0;
    while(i<count){
